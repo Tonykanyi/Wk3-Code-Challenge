@@ -1,23 +1,35 @@
-fetch ("http://localhost:3000/films")
+const main = document.querySelector("main")
+const movie_details = document.querySelector("#movie-details")
+url = "http://localhost:3000/films"
+fetch (url)
 .then(response => response.json())
 .then(films => 
   films.map(film=>{
-  const title= document.createElement("h1")
+  const title= document.createElement("li")
+  addEventListener('click',()=> movie_desc(film.id))
   title.innerHTML = film.title
   main.appendChild(title)
 
-  const description=document.createElement("p")
-  description.innerHTML=film.description
-  main.appendChild(description)
 
-  const showtime =document.createElement("h3")
-  showtime.innerHTML=film.showtime
-  main.appendChild(showtime)
 
-  const image=document.createElement("img")
-  image.src=film.poster
-  main.appendChild(image)
- 
   
 }) 
 )
+function movie_desc(filmId){
+  fetch ("http://localhost:3000/films")
+  .then(response => response.json)
+  .then (films=>{
+    const description=document.querySelector("#movie-details")
+    description.innerHTML=`<h1>${films.title}</h1>
+  <div>
+  <p>${films.description}</p>
+  </div>
+  <h2>The movie starts at : ${films.showtime}</h2>
+  <h3>There are ${films.capacity - films.tickets_sold} tickets left</h3>
+  <img src="${films.poster}"/>
+  `
+
+
+}
+  )
+}
