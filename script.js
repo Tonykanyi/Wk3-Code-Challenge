@@ -10,9 +10,11 @@ fetch (url)
   title.addEventListener('click',()=> { movie_desc(film.id) })
   title.innerHTML = film.title
   main.appendChild(title) 
+
    
 }) 
 )
+
 function movie_desc(filmId){
   console.log("----",filmId)
   fetch ("http://localhost:3000/films/"+filmId)
@@ -30,6 +32,7 @@ function movie_desc(filmId){
   
   `
 
+  
 
 }
   )
